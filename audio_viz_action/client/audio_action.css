@@ -1,0 +1,32 @@
+/* Main stylesheet */
+
+
+
+#vid_action_container {
+  position: relative;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  height:100vh;
+}
+
+#svg_div {
+  position:relative;
+  margin:0px auto;
+  width:100%;
+  height:100%;
+}
+
+path {
+  fill: none;
+  opacity: 0.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+
+
+#video-input-form {
+  height:50px;
+}

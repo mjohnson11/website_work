@@ -1,0 +1,147 @@
+<html>
+
+<head>
+<link rel='stylesheet' href='css/qian_sheet.css' />
+
+<title>Qian et al 2012 DATA BROWSER</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="../../d3/d3.min.js"></script>
+<script src="js/about_trigger.js"></script>
+<script src="js/qian_jdfes.js"></script>
+    
+</head>
+
+<body onload="read_data()">
+    <h1 id="page_title">Qian et al 2012 Data Browser</h1>
+    <div class="line_divider_2"></div><br /><br />
+    <div id="about_div">
+        <h3 id="about_title">About This Visualization</h3>
+        (**THIS WORKS BEST IN GOOGLE CHROME**) The graphs below plot the fitness effects of <i>S. cerevisiae</i> gene deletions in different environments using data from <a href="http://dx.doi.org/10.1016/j.celrep.2012.09.017">this paper.</a>&nbsp&nbsp<span class="about_click" onClick="show_about()"> more about the visualization...</span><br /><br />
+        <p1 id="about_text">
+            The turquoise box in the joint fitness effects graph below reflects the range of fitness effects that were not significantly different from the effects of pseudogene deletions.  You can hover or click on points or lines below to see more information, or you can search for a gene of interest (i.e. "WHI2") using the text box below. Information on individual genes comes from YeastMine and the Saccharomyces Genome Database (http://yeastmine.yeastgenome.org/).<span class="about_click" onClick="show_about()"> less...</span>
+            <br /><br />
+        </p1>
+    </div>
+    <div id="qian_div">
+        <select id="select_x" onchange="change_x_axis()" value="YPD rep1">
+            <option>YPD rep1</option>
+            <option>YPD rep2</option>
+            <option>YPG</option>
+            <option>YPE</option>
+            <option>SC</option>
+            <option>OAK</option>
+            <option>ETH</option>
+        </select>
+        <select id="select_y" onchange="change_y_axis()" value="SC">
+            <option>SC</option>
+            <option>YPD rep1</option>
+            <option>YPD rep2</option>
+            <option>YPG</option>
+            <option>YPE</option>
+            <option>OAK</option>
+            <option>ETH</option>
+        </select>
+        <select id="select_GO" onchange="highlight_GO()">
+            <option>Show All</option>
+            <option>hydrolase activity</option>
+            <option>transferase activity</option>
+            <option>DNA binding</option>
+            <option>transmembrane transporter activity</option>
+            <option>structural molecule activity</option>
+            <option>oxidoreductase activity</option>
+            <option>RNA binding</option>
+            <option>enzyme regulator activity</option>
+            <option>structural constituent of ribosome</option>
+            <option>ATPase activity</option>
+            <option>kinase activity</option>
+            <option>nucleic acid binding transcription factor activity</option>
+            <option>mRNA binding</option>
+            <option>phosphatase activity</option>
+            <option>peptidase activity</option>
+            <option>lipid binding</option>
+            <option>methyltransferase activity</option>
+            <option>transcription factor activity, protein binding</option>
+            <option>transferase activity, transferring glycosyl groups</option>
+            <option>nuclease activity</option>
+            <option>chromatin binding</option>
+            <option>lyase activity</option>
+            <option>ligase activity</option>
+            <option>ion binding</option>
+            <option>protein binding, bridging</option>
+            <option>unfolded protein binding</option>
+            <option>hydrolase activity, acting on glycosyl bonds</option>
+            <option>cytoskeletal protein binding</option>
+            <option>enzyme binding</option>
+            <option>isomerase activity</option>
+            <option>GTPase activity</option>
+            <option>transcription factor binding</option>
+            <option>histone binding</option>
+            <option>ubiquitin-like protein binding</option>
+            <option>nucleotidyltransferase activity</option>
+            <option>signal transducer activity</option>
+            <option>helicase activity</option>
+            <option>guanyl-nucleotide exchange factor activity</option>
+            <option>protein transporter activity</option>
+            <option>translation factor activity, RNA binding</option>
+            <option>rRNA binding</option>
+            <option>not_yet_annotated</option>
+        </select>
+        <div id="svg_div"></div>
+        <div id="s_indicators_div"></div>
+        <div id="loading"><h2>Loading, this may take a minute...</h2></div>
+        <div id="jdfe_title"><h3>Joint Fitness Effects of Gene Deletions</h3></div>
+        <div id="go_select_title"><h3>Highlight genes matching a GO Slim term:</h3></div>
+        <div id="gene_search_title"><h3>Search for a gene or ORF:</h3></div>
+        <input type="text" id="gene_search" onchange="lookup_highlight()">
+        <div id="lin_info_div">
+            <svg id="lin_info_svg" height="140" width="1200">
+                <line x1="0" y1="25" x2="1200" y2="25" style="stroke:black;stroke-width:1" />
+                <line x1="300" y1="5" x2="300" y2="45" style="stroke:black;stroke-width:1" />
+                <line x1="600" y1="5" x2="600" y2="45" style="stroke:black;stroke-width:1" />
+            </svg>
+            <div id="lin_info_orf" class="lin_info_text1"><p2>ORF</p2></div>
+            <div id="lin_info_gene" class="lin_info_text1"><p2>Gene Name</p2></div>
+            <div id="lin_info_descrip" class="lin_info_text1"><p2>Brief Description</p2></div>
+            <div id="lin_orf" class="lin_info_report1"></div>
+            <div id="lin_gene" class="lin_info_report1"></div>
+            <div id="lin_descrip" class="lin_info_report1"></div>
+        </div>
+
+    </div>
+    <div id="extra_info">
+        <div class="info_piece" id="GO.Slim">
+            <h3 class="info_title">GO Slim Categories</h3><p1 class="info_info"></p1>
+        </div> 
+        <div class="info_piece" id="Gene.description">
+            <h3 class="info_title">Description</h3><p1 class="info_info"></p1>
+        </div> 
+        <div class="info_piece" id="Gene.functionSummary">
+            <h3 class="info_title">Function Summary</h3><p1 class="info_info"></p1>
+        </div>
+        <div class="info_piece" id="Gene.phenotypeSummary">
+            <h3 class="info_title">Phenotype Summary</h3><p1 class="info_info"></p1>
+        </div>            
+        <div class="info_piece" id="Gene.chromosome.primaryIdentifier">
+            <h3 class="info_title">Chromosome</h3><p1 class="info_info"></p1>
+        </div> 
+        <div class="info_piece" id="Gene.length">
+            <h3 class="info_title">Length</h3><p1 class="info_info"></p1>
+        </div>
+        <div class="info_piece" id="SGD.link">
+            <h3 class="info_title">See more at SGD:</h3><p1 id="SGD_link_text" class="info_info"></p1>
+        </div>
+    </div>
+
+</body>
+    
+</html>
+
+
+
+
+
+
+

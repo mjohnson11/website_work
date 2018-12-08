@@ -1,0 +1,310 @@
+@charset "UTF-8";
+/* CSS Document */ 
+/*root stylesheet*/
+
+body {
+	background-color: #FFFBF7;
+	cursor:default;
+	font-family:"Palatino Linotype", Fallback, serif;
+}
+
+select {
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+#plt_div {
+    position: relative;
+    margin: 0px auto;
+    height:850px;
+    width:1400px;
+}
+
+p4 {
+    font-size: 1.1em;
+    text-decoration: none;
+    line-height: 150%;
+}
+
+h3 {
+    margin: 0px;
+}
+
+#page_title {
+    text-align: center;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+#select_y {
+    display: none;
+    position: absolute;
+    top: 600px;
+    left: 265px;
+    z-index: 2;
+}
+
+#select_x {
+    display: none;
+    position: absolute;
+    top: 280px;
+    left: 570px;
+    z-index: 2;
+}
+
+.big_svg {
+    position:absolute;
+    width:1400px;
+    height:1000px;
+}
+
+.raw_data_svg {
+    position:absolute;
+    left:0px;
+    width:1400px;
+    height:250px;
+}
+
+#raw_data_div {
+    position: absolute;
+    top: 800px;
+    left: 0px;
+    width: 1400px;
+    height: 250px;
+    display: none;
+}
+
+#raw_data_about {
+    position: absolute;
+    top: 220px;
+    left: 70px;
+    width: 1300px;
+    text-align: center;
+}
+
+#lin_tracking_img {
+    display: none;
+    position:absolute;
+    top: 130px;
+    left: 800px;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+#lin_tracking_NA {
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 300px;
+    left: 800px;
+    margin: 0px auto;
+    width: 400px;
+    height: 80px;
+}
+
+#lin_tracking_intro {
+    position: absolute;
+    top: 200px;
+    left: 400px;
+    margin: 0px auto;
+    width: 400px;
+    height: 80px;
+}
+
+#lin_tracking_title {
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 50px;
+    left: 800px;
+    margin: 0px auto;
+    width: 400px;
+    height: 80px;
+}
+#jdfe_title {
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    left: 150px;
+    margin: 0px auto;
+    width: 400px;
+    height: 80px;
+}
+
+#lin_info_div {
+    display: none;
+    position: absolute;
+    top: 650px;
+    left: 25px;
+    margin: 0px auto;
+    width: 600px;
+    height: 140px;
+    text-align: center;
+}
+
+.lin_info_text1 {
+    position: absolute;
+    top: 5px;
+    width: 290px;
+    margin-left: 5px;
+    margin-right:  5px;
+    text-align: center;
+}
+
+.lin_info_report1 {
+    position: absolute;
+    top: 28px;
+    width: 290px;
+    margin-left: 5px;
+    margin-right:  5px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.lin_info_text2 {
+    position: absolute;
+    top: 60px;
+    width: 290px;
+    margin-left: 5px;
+    margin-right:  5px;
+    text-align: center;
+}
+
+.lin_info_report2 {
+    position: absolute;
+    top: 83px;
+    width: 290px;
+    margin-left: 5px;
+    margin-right:  5px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+
+#lin_info_id {
+    left: 0px;
+}
+#lin_info_env {
+    left: 300px;
+}
+#lin_info_bcdiv {
+    left: 0px;
+}
+#lin_info_bcenv {
+    left: 300px;
+}
+#lin_id {
+    left: 0px;
+}
+#lin_env {
+    left: 300px;
+}
+#lin_bcdiv {
+    left: 0px;
+}
+#lin_bcenv {
+    left: 300px;
+}
+
+#env_highlight {
+    position: absolute;
+    margin: 0px auto;
+    width: 600px;
+    top: 500px;
+    left: 730px;
+    height: 70px;
+}
+
+#env_highlight_title {
+    position: absolute;
+    top: 0px;
+}
+
+.general_env_button {
+    position: absolute;
+    top: 30px;
+    width: 60px;
+    height: 19px;
+    background-color:lightgray;
+    font-size: 14px;
+    text-align: center;
+    cursor: default;
+    border: 1px solid transparent;
+}
+
+.general_env_button:hover {
+    opacity: 0.6;
+}
+
+#show_data_button {
+    position: absolute;
+    top: 770px;
+    width: 200px;
+    height: 24px;
+    background-color:lightgray;
+    text-align: center;
+    cursor: default;
+    /*border: 1px solid black;*/
+}
+
+#methods_svg {
+    position: absolute;
+    left: 800px;
+    top: 0px;
+}
+
+#about_descrip {
+    position:absolute;
+    left: 0px;
+    width: 800px;
+}
+
+#show_data_button:hover {
+    opacity: 0.6;
+}
+
+#about_div {
+	position:relative;
+	width:1200px;
+	margin: 0px auto;
+}
+
+.about_click {
+    text-decoration:underline;
+    cursor: default;
+}
+.about_click:hover {
+    color:red;
+    opacity:0.8;
+}
+.about_click:active {
+    opacity:0.5;
+}
+
+#about_text {
+    display:none;
+    text-align:left;
+    position: relative;
+    margin: 0px auto;
+    width: 1100px;
+}
+#about_text_text {
+    position: relative;
+    left: 0px;
+    width: 750px;
+    text-align: justify;
+}

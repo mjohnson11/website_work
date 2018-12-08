@@ -1,0 +1,93 @@
+<html>
+
+<head>
+<link rel='stylesheet' href='css/plt_july_sheet.css' />
+
+<title>PLT DATA BROWSER</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="../../d3/d3.min.js"></script>
+<script src="js/about_trigger.js"></script>
+<script src="js/plt_july_jdfes.js"></script>
+    
+</head>
+
+<body onload="read_data()">
+    <h1 id="page_title">Pleiotropy Lineage Tracking Data Browser</h1>
+    <div class="line_divider_2"></div><br /><br />
+    <div id="about_div">
+        <p1>(**THIS WORKS BEST IN GOOGLE CHROME**) The fitness of yeast lineages isolated from an evolution experiment are plotted below, measured in 8 different liquid media environments.<span class="about_click" onClick="show_about()"> more...</span></p1>
+        <div id="about_text">
+            <img src="data/PLTdescription.png" id="methods_svg" width="260" height="325">
+            <div id="about_text_text">
+            <h3>Overview</h3>Populations of yeast with diverse random DNA barcodes were evolved in different environments (corresponding to the colored buttons below), clones were selected from each environment, and the fitness (relative to an ancestor) of these clones was tested in several environments. The graph below is a representation of the "joint distribution of fitnesses" between two environments.  Each point represents a single clone, and its position represents its fitness (where 1 is the fitness of the ancestor) in each of two test environments. If you click on the buttons on either axis of the graph you can change that axis to display the fitness in another test environment. At right, a "spaghetti plot" shows the fitness values of each clone as a line, where the height corresponds to its fitness in each environment. By sequencing the barcode region at several timepoints during 5-day all-vs-all competitions in each of the test environments, we measured the changes in frequency of each clone, and calculated its fitness using those trajectories. You can see these raw trajectories at the bottom of the page. If you hover over a lineage, you can see its barcode information in addition to its evolution or "home" environment.  If you click on one of the colored buttons below you can highlight clones from only one of these home environments. If barcode lineage tracking data is available from evolution in that environment, that data is displayed on the right. <br /><span class="about_click" onClick="show_about()">less...</span>
+            <br /><br />
+            </div>
+        </div>
+    </div>
+    <div id="plt_div">
+        <select id="select_x" onchange="change_x_axis()" value="YPD">
+            <option>YPD</option>
+            <option>SC</option>
+            <option>48 hr</option>
+            <option>37C</option>
+            <option>pH 7.3</option>
+            <option>pH 3.8</option>
+            <option>21C</option>
+            <option>Fluconazole</option>
+            <option>Glycerol/Ethanol</option>
+        </select>
+        <select id="select_y" onchange="change_y_axis()" value="SC">
+            <option>SC</option>
+            <option>YPD</option>
+            <option>48 hr</option>
+            <option>37C</option>
+            <option>pH 7.3</option>
+            <option>pH 3.8</option>
+            <option>21C</option>
+            <option>Fluconazole</option>
+            <option>Glycerol/Ethanol</option>
+        </select>
+        <div id="svg_div"></div>
+        <div id="raw_data_div">            
+            <div id="raw_data_about">
+                <p1>Raw frequency trajectories from the bulk competition experiments. The x-axis is time, with readings from 8, 16, 24, and 40 generations, and the y-axis is log10(frequency).</p1>
+            </div>
+        </div>
+        <div id="jdfe_title"><h3>Joint Fitness Values of Evolved Lineages</h3></div>
+        <div id="lin_tracking_title"><h3>Lineage Tracking From Evolution</h3></div>
+        <div id="lin_tracking_NA"><p4>Lineage tracking not available from this environment, sorry!</p4></div>
+        <div id="lin_tracking_intro"><h2>Loading, this may take a minute...</h2></div>
+        <img id="lin_tracking_img" src="data/21C_alpha_250000.png"></img>
+        <div id="lin_info_div">
+            <svg id="lin_info_svg" height="165" width="600">
+                <line x1="0" y1="25" x2="600" y2="25" style="stroke:black;stroke-width:1" />  
+                <line x1="300" y1="5" x2="300" y2="45" style="stroke:black;stroke-width:1" />
+                <line x1="0" y1="80" x2="600" y2="80" style="stroke:black;stroke-width:1" />
+                <line x1="300" y1="60" x2="300" y2="100" style="stroke:black;stroke-width:1" />
+            </svg>
+            <div id="lin_info_id" class="lin_info_text1"><p2>Lineage #</p2></div>
+            <div id="lin_info_env" class="lin_info_text1"><p2>Evolution Environment</p2></div>
+            <div id="lin_info_bcdiv" class="lin_info_text2"><p2>Diverse Barcode</p2></div>
+            <div id="lin_info_bcenv" class="lin_info_text2"><p2>Environment Barcode</p2></div>
+            <div id="lin_id" class="lin_info_report1"></div>
+            <div id="lin_env" class="lin_info_report1"></div>
+            <div id="lin_bcdiv" class="lin_info_report2"></div>
+            <div id="lin_bcenv" class="lin_info_report2"></div>
+        </div>
+            
+        <h2 id="debug_text"></h2>
+    </div>
+
+</body>
+    
+</html>
+
+
+
+
+
+
+
